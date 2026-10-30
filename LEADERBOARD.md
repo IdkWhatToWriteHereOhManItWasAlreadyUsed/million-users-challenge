@@ -37,6 +37,7 @@ by 16 cores.
 | 17 | [`c-iouring-TheFirstIstari`](https://github.com/arjaythedev/million-users-challenge/pull/16)† | [#16](https://github.com/arjaythedev/million-users-challenge/pull/16) | C | own io_uring/epoll event loop with `SO_REUSEPORT`, picohttpparser, libpq prepared statements, libdeflate gzip | 285,000 | 255,000 | 225,000 | 2026-10-30 |
 | 18 | [`go`](examples/go) (the video's server) | — | Go | Gin + pgx/v5 `pgxpool` | 248,000 | 230,000 | 124,000 | 2026-10-19 |
 | 19 | [`python`](examples/python) (the video's server) | — | Python | FastAPI on Gunicorn/Uvicorn workers + asyncpg | 213,000 | 104,000 | 51,000 | 2026-10-19 |
+| 20 | [`cmake-lots_of_things-IdkWhatToWriteHereOhManItWasAlreadyUsed`](https://github.com/arjaythedev/million-users-challenge/pull/17)ᵖ | [#17](https://github.com/arjaythedev/million-users-challenge/pull/17) | CMake | libevent listener + NASM launcher running `cmake -P` per request (HTTP, JWT, JSON in CMake script), libpq pool daemon over a unix socket | 1,000 | 1,000 | 1,000 | 2026-10-30 |
 
 The six example servers were scored for the video (2026-10-18/19) with borrowed load generators and the old doubling
 search; the test, the boxes and the pass rules are otherwise the same.
@@ -46,3 +47,7 @@ search; the test, the boxes and the pass rules are otherwise the same.
 
 † Held, not merged yet: under load #16 answers `404 post not found` for some `GET /posts/:id` of posts taken from
 the feed (about 2 % of them in the 4-core hold). Scored at e51443b.
+
+ᵖ Held, not merged yet: #17's `install.sh` was patched for the run only (it chowns `/app` to root, so `build.sh` as
+`challenge` couldn't write there; the run used `chown -R challenge:challenge /app`), and it installs into `/app` and
+`/tmp` instead of its own folder. Scored at 79c8ed4.
