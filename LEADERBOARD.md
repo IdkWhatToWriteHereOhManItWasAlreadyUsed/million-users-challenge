@@ -34,11 +34,15 @@ by 16 cores.
 | 14 | [`forth-gforth-FantasticForth`](submissions/forth-gforth-FantasticForth) | [#8](https://github.com/arjaythedev/million-users-challenge/pull/8) | Forth | Gforth, forked epoll workers with `SO_REUSEPORT`, libpq prepared statements via FFI | 420,000 | 290,000 | 158,000 | 2026-10-29 |
 | 15 | [`rust`](examples/rust) (the video's server) | — | Rust | axum + SQLx | 413,000 | 227,000 | 114,000 | 2026-10-19 |
 | 16 | [`java`](examples/java) (the video's server) | — | Java | Spring Boot 3.5 (Tomcat, virtual threads) + HikariCP + pgjdbc | 321,000 | 312,000 | 176,000 | 2026-10-19 |
-| 17 | [`go`](examples/go) (the video's server) | — | Go | Gin + pgx/v5 `pgxpool` | 248,000 | 230,000 | 124,000 | 2026-10-19 |
-| 18 | [`python`](examples/python) (the video's server) | — | Python | FastAPI on Gunicorn/Uvicorn workers + asyncpg | 213,000 | 104,000 | 51,000 | 2026-10-19 |
+| 17 | [`c-iouring-TheFirstIstari`](https://github.com/arjaythedev/million-users-challenge/pull/16)† | [#16](https://github.com/arjaythedev/million-users-challenge/pull/16) | C | own io_uring/epoll event loop with `SO_REUSEPORT`, picohttpparser, libpq prepared statements, libdeflate gzip | 285,000 | 255,000 | 225,000 | 2026-10-30 |
+| 18 | [`go`](examples/go) (the video's server) | — | Go | Gin + pgx/v5 `pgxpool` | 248,000 | 230,000 | 124,000 | 2026-10-19 |
+| 19 | [`python`](examples/python) (the video's server) | — | Python | FastAPI on Gunicorn/Uvicorn workers + asyncpg | 213,000 | 104,000 | 51,000 | 2026-10-19 |
 
 The six example servers were scored for the video (2026-10-18/19) with borrowed load generators and the old doubling
 search; the test, the boxes and the pass rules are otherwise the same.
 
 \* Held, not merged yet: #4 accepts a JWT with no `exp`, which the SPEC requires. Scored at 1f3ac0c on kernel
 6.8.0-117 (its earlier `failed` was our app box's 6.8.0-147 kernel, not the entry).
+
+† Held, not merged yet: under load #16 answers `404 post not found` for some `GET /posts/:id` of posts taken from
+the feed (about 2 % of them in the 4-core hold). Scored at e51443b.
