@@ -26,7 +26,7 @@ by 16 cores.
 | 6 | [`rust-tokio-cknutson12`](submissions/rust-tokio-cknutson12) | [#1](https://github.com/arjaythedev/million-users-challenge/pull/1) | Rust | thread-per-core tokio, hand-written HTTP/1.1, pipelined tokio-postgres | 1,000,000 (max) | 1,210,000 | 1,130,000 | 2026-10-28 |
 | 7 | [`c-h2o-einhornimmond`](submissions/c-h2o-einhornimmond) | [#9](https://github.com/arjaythedev/million-users-challenge/pull/9) | C | h2o (libh2o) built with Zig, libpq pipeline mode, prepared statements | 1,000,000 (max) | 1,180,000 | 1,160,000 | 2026-10-29 |
 | 8 | [`typescript-bun-tbsvttr`](submissions/typescript-bun-tbsvttr) | [#13](https://github.com/arjaythedev/million-users-challenge/pull/13) | TypeScript | Bun.serve with `reusePort`, a worker per core, Bun.SQL prepared statements, libdeflate gzip | 1,000,000 (max) | 1,080,000 | 395,000 | 2026-10-29 |
-| 9 | [`crystal-epoll-faustinoaq`](https://github.com/arjaythedev/million-users-challenge/pull/18)ᵖ | [#18](https://github.com/arjaythedev/million-users-challenge/pull/18) | Crystal | forked worker per core with `SO_REUSEPORT`, own io_uring loop and Postgres wire client, pipelined prepared statements, no GC | 1,000,000 (max) | 1,020,000 | 995,000 | 2026-10-30 |
+| 9 | [`crystal-epoll-faustinoaq`](submissions/crystal-epoll-faustinoaq) | [#18](https://github.com/arjaythedev/million-users-challenge/pull/18) | Crystal | forked worker per core with `SO_REUSEPORT`, own io_uring loop and Postgres wire client, pipelined prepared statements, no GC | 1,000,000 (max) | 935,000 | 1,030,000 | 2026-10-31 |
 | 10 | [`c-iouring-TheFirstIstari`](https://github.com/arjaythedev/million-users-challenge/pull/16)† | [#16](https://github.com/arjaythedev/million-users-challenge/pull/16) | C | own io_uring/epoll event loop with `SO_REUSEPORT`, picohttpparser, libpq prepared statements, libdeflate gzip | 910,000 | 840,000 | 705,000 | 2026-10-30 |
 | 11 | [`bun-elysia-youssefsz`](submissions/bun-elysia-youssefsz) | [#14](https://github.com/arjaythedev/million-users-challenge/pull/14) | TypeScript | Elysia 1.4 + Drizzle ORM over Bun SQL, prepared statements, admission queue | 840,000 | 500,000 | 225,000 | 2026-10-29 |
 | 12 | [`java-quarkus-stohirov`](submissions/java-quarkus-stohirov) | [#3](https://github.com/arjaythedev/million-users-challenge/pull/3) | Java | Quarkus 3.40 (Vert.x Web router) + Vert.x reactive Postgres client | 780,000 | 605,000 | 440,000 | 2026-10-28 |
@@ -53,6 +53,4 @@ checked against upstream. Scored at 7c3ad7d (the `404 post not found` bug of its
 
 ᵖ Held, not merged yet: #17's `install.sh` was patched for the run only (it chowns `/app` to root, so `build.sh` as
 `challenge` couldn't write there; the run used `chown -R challenge:challenge /app`), and it installs into `/app` and
-`/tmp` instead of its own folder. Scored at 79c8ed4. #18's `start.sh` was patched for the run only (it crashed at
-startup when launched from a directory `challenge` can't read; the run used `cd "$(dirname "$0")"` before
-`exec ./bin/server`). Scored at 649ab16.
+`/tmp` instead of its own folder. Scored at 79c8ed4.
